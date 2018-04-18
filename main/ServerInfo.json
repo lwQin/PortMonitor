@@ -1,5 +1,5 @@
 {
-	"localserver": {
+	"serverflag": {
 		"host": "host",
 		"port": 22,
 		"username": "username",
