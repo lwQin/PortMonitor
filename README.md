@@ -1,5 +1,8 @@
 # PortMonitor
 
+一个微小的服务端端口监控程序，带web界面，支持通过web重启服务器程序（需自定义配置）
+![index](http://baidu.com/pic/doge.png)https://raw.githubusercontent.com/lwQin/PortMonitor/master/img/index.png
+
 ## 初始化
 请自行安装python虚拟环境（virtualenv），以下操作均在 **venv** 环境下进行，操作系统环境为 **Windows**
 ### 安装第三方库
