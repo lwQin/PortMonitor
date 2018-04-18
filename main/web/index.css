@@ -1,0 +1,68 @@
+body {
+	font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    background: #F7F7F7
+}
+.el-row {
+    margin-bottom: 20px;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+.row-header {
+    padding: 0 20px;
+}
+.text {
+    font-size: 14px;
+}
+.item {
+    margin-bottom: 18px;
+}
+.clearfix:before, .clearfix:after {
+    display: table;
+    content:"";
+}
+.clearfix:after {
+    clear: both
+}
+.float-right {
+    float: right;
+    padding: 3px 0;
+}
+.logs-area {
+    max-height: 210px;
+    overflow: auto;
+}
+.alertError {
+    border: 1px solid #F56C6C;
+    border-radius: 5px;
+    -webkit-animation: alertError 3s infinite;
+    -moz-animation: alertError 3s infinite;
+    -o-animation: alertError 3s infinite;
+    -ms-animation: alertError 3s infinite;
+    animation: alertError 3s infinite;
+}
+@-webkit-keyframes alertError{
+    0%{box-shadow:0 0 12px 0 #F56C6C;}
+    50%{box-shadow:0 0 35px #F56C6C;}
+    100%{box-shadow:0 0 12px 0 #F56C6C;}
+}
+@-moz-keyframes alertError{/* Firefox */
+    0%{box-shadow:0 0 12px 0 #F56C6C;}
+    50%{box-shadow:0 0 35px 0 #F56C6C;}
+    100%{box-shadow:0 0 12px 0 #F56C6C;}
+}
+@-o-keyframes alertError{
+    0%{box-shadow:0 0 12px 0 #F56C6C;}
+    50%{box-shadow:0 0 35px 0 #F56C6C;}
+    100%{box-shadow:0 0 12px 0 #F56C6C;}
+}
+@-ms-keyframes alertError{
+    0%{box-shadow:0 0 12px 0 #F56C6C;}
+    50%{box-shadow:0 0 35px 0 #F56C6C;}
+    100%{box-shadow:0 0 12px 0 #F56C6C;}
+}
+@keyframes alertError{
+    0%{box-shadow:0 0 12px 0 #F56C6C;}
+    50%{box-shadow:0 0 35px 0 #F56C6C;}
+    100%{box-shadow:0 0 12px 0 #F56C6C;}
+}

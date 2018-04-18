@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+     
+    <head>
+        <title>PortScanner</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0" />
+        <link rel="stylesheet" href="https://cdn.bootcss.com/element-ui/2.3.3/theme-chalk/index.css" />
+        <link rel="stylesheet" href="https://cdn.bootcss.com/limonte-sweetalert2/7.18.0/sweetalert2.min.css" />
+        <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="index.css" />
+    </head>
+     
+    <body>
+        <audio src="alert.mp3" id="music"></audio>
+        <div>
+            <div id="app">
+                <el-container>
+                    <el-header style="height: 100%;">
+                        <el-card shadow="hover">
+                            <el-row :gutter="20">
+                                <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6">
+                                    <p>
+                                        <el-switch v-model="nightMode" active-color="#303133" inactive-color="#409EFF" active-text="夜间模式" inactive-text="日间模式" @change="changeNightModel()"></el-switch>
+                                    </p>
+                                </el-col>
+                                <el-col :xs="24" :sm="12" :md="6" :lg="6" :xl="6">
+                                    <p>Websocket 服务端状态： 
+                                        <span v-if="ws.status === 0" style="color: #409EFF">连接中</span>
+                                        <span v-else-if="ws.status === 1" style="color: #67C23A">已连接</span>
+                                        <span v-else-if="ws.status === 2" style="color: #E6A23C">连接关闭中</span>
+                                        <span v-else-if="ws.status === 3" style="color: #F56C6C">断开</span>
+                                    </p>
+                                </el-col>
+                                <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                                    <p>
+                                        <el-tag style="margin-top: 10px;">日间模式：10次响警报</el-tag>
+                                        <el-tag style="margin-top: 10px;">夜间模式：20次响警报</el-tag>
+                                        <el-tag style="margin-top: 10px;" type="danger">15次激活“重启”按钮</el-tag>
+                                        <el-tag style="margin-top: 10px;">测试模式下1次响警报和激活按钮</el-tag>
+                                    </p>
+                                </el-col>
+                            </el-row>
+                            <el-row class="logs-area">
+                                <div v-for="log in logs" :key="log" class="text">
+                                    <el-alert title="" type="error" :closable="false">
+                                        {{ log }}
+                                    </el-alert>
+                                </div>
+                            </el-row>
+                        </el-card>
+                    </el-header>
+                    <el-main>
+                        <el-row :gutter="20"  v-for="(group, index) in server_groups">
+                            <div class="row-header">{{group.description}}</div>
+                            <el-col :xs="24" :sm="6" :md="6" :lg="6" :xl="4" style="padding-top: 10px;" v-for="server in group.data">
+                                <el-card v-bind:class="{alertError: server.alertErr}">
+                                    <div slot="header" class="clearfix">
+                                        <span>
+                                            <i v-if="server.type === 'server'" class="fa fa-server"></i>
+                                            <i v-else-if="server.type === 'linux'" class="fa fa-linux"></i>
+                                            <i v-else-if="server.type === 'windows'" class="fa fa-windows"></i>
+                                            <i v-else-if="server.type === 'database'" class="fa fa-database"></i>
+                                            {{ server.description }}
+                                        </span>
+                                        <!-- <el-button v-if="server.flag === 'localserver'" class="float-right" type="text" v-bind:disabled="server.btnDisable" v-on:click="restart(server)">重启</el-button> -->
+                                        <el-button class="float-right" type="text" v-bind:disabled="server.btnDisable" v-on:click="restart(server)">重启</el-button>
+                                    </div>
+                                    <div class="text item">
+                                        地址:<span class="float-right">{{ server.host }}</span>
+                                    </div>
+                                    <div class="text item">
+                                        端口:<span class="float-right">{{ server.port }}</span>
+                                    </div>
+                                    <div class="text item">
+                                        状态:
+                                        <span class="float-right">
+                                            <el-tag v-if="server.status === 'OPEN'" type="success">{{ server.status }}</el-tag>
+                                            <el-tag v-else-if="server.status === 'CLOSE'" type="danger">{{ server.status }}</el-tag>
+                                            <el-tag v-else type="warning"> {{ server.status }}</el-tag>
+                                        </span>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                    </el-main>
+                </el-container>
+            </div>
+        </div>
+        <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+        <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+        <script src="https://cdn.bootcss.com/element-ui/2.3.3/index.js"></script>
+        <script src="https://cdn.bootcss.com/limonte-sweetalert2/7.18.0/sweetalert2.min.js"></script>
+        <script src="index.js"></script>
+    </body>
+ 
+</html>

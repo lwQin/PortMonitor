@@ -1,0 +1,11 @@
+{
+    "默认分组": [
+        {
+            "type": "server",
+            "description": "本地web 80端口",
+            "host": "localhost",
+            "port": 80,
+            "flag": "localserver"
+        }
+    ]
+}

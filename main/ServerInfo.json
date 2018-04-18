@@ -1,0 +1,10 @@
+{
+	"localserver": {
+		"host": "host",
+		"port": 22,
+		"username": "username",
+		"password": "password",
+		"cmd_path": "command",
+		"log_path": "/path/to/log"
+	}
+}
